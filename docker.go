@@ -76,6 +76,16 @@ func NewContainer(ctx context.Context, image string, cmd []string, port ...strin
 	return
 }
 
+func (d *Container) Pause() (err error) {
+	err = d.cli.ContainerPause(d.ctx, d.id)
+	return
+}
+
+func (d *Container) Unpause() (err error) {
+	err = d.cli.ContainerUnpause(d.ctx, d.id)
+	return
+}
+
 func (d *Container) Close() (err error) {
 	d.cli.ContainerStop(d.ctx, d.id, nil)
 	d.cli.ContainerRemove(d.ctx, d.id, types.ContainerRemoveOptions{

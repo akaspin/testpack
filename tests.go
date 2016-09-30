@@ -24,7 +24,7 @@ type skipper interface {
 // SkipUnless skip tests
 func SkipUnless(t skipper, short bool, env ...string) {
 	if short && testing.Short() {
-		t.Skip("wan't run in -short")
+		t.Skipf("%s: wan't run with -short", GetTestName(t))
 		return
 	}
 	for _, e := range env {
