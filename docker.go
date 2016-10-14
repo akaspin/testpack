@@ -86,6 +86,11 @@ func (d *Container) Unpause() (err error) {
 	return
 }
 
+func (d *Container) Kill() (err error) {
+	err = d.cli.ContainerKill(d.ctx, d.id, "SIGKILL")
+	return
+}
+
 func (d *Container) Close() (err error) {
 	d.cli.ContainerStop(d.ctx, d.id, nil)
 	d.cli.ContainerRemove(d.ctx, d.id, types.ContainerRemoveOptions{

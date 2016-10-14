@@ -4,15 +4,27 @@ import (
 	"testing"
 	"os"
 	"reflect"
+	"regexp"
 )
 
-// GetTestName returns test name
+// GetTestName returns test name with
 func GetTestName(t interface{}) (n string) {
 	pointerVal := reflect.ValueOf(t)
 	val := reflect.Indirect(pointerVal)
 
 	member := val.FieldByName("name")
 	n = member.String()
+	return
+}
+
+func GetTestNameN(t interface{}) (n string) {
+	n = NormalizeName(GetTestName(t))
+	return
+}
+
+func NormalizeName(in string) (out string)  {
+	re := regexp.MustCompile("[^a-zA-Z0-9_]")
+	out = re.ReplaceAllLiteralString("Test/aasf=01", "_")
 	return
 }
 
