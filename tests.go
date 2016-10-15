@@ -24,7 +24,7 @@ func GetTestNameN(t interface{}) (n string) {
 
 func NormalizeName(in string) (out string)  {
 	re := regexp.MustCompile("[^a-zA-Z0-9_]")
-	out = re.ReplaceAllLiteralString("Test/aasf=01", "_")
+	out = re.ReplaceAllLiteralString(in, "_")
 	return
 }
 
